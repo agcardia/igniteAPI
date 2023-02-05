@@ -1,30 +1,31 @@
 const express = require('express');
 const router = express.Router();
-const Expense = require('../models/expenseModel');
+const Revenue = require('../models/revenueModel');
 
 router.post('/',async (req,res) => {
     try {
-        console.log(req.body);
         name = req.body.name;
         date = Date.now();
         amount = parseInt(req.body.amount);
-        description = req.body.description;
+        invoiced = req.body.invoiced;
+        paid = req.body.paid;
         payMethod = req.body.payMethod;
 
-        const expense  = new Expense({
+        const revenue  = new Revenue({
             name,
             amount,
             date,
-            description,
+            invoiced,
+            paid,
             payMethod
         });
 
-        const expenseDoc = await(expense).save();
+        const revenueDoc = await(revenue).save();
 
         res.status(200).json({
             success: true,
-            message: `Expense has been added successfully!`,
-            brand: expenseDoc
+            message: `Revenue has been added successfully!`,
+            brand: revenueDoc
           });
     }
     catch (error) {
@@ -37,7 +38,7 @@ router.post('/',async (req,res) => {
 router.get('/', async (req,res) => {
     try {
         console.log(req.params.id);
-        const expenses = await Expense.find({});
+        const expenses = await Revenue.find({});
         res.status(200).json({
             "Results": expenses
         });
@@ -52,8 +53,7 @@ router.get('/', async (req,res) => {
 router.get('/:id', async (req,res) => {
     try {
         id = req.params.id;
-        console.log(Expense.findById(id));
-        const expenses = await Expense.findById(id);
+        const expenses = await Revenue.findById(id);
         res.status(200).json({
             "Results": expenses
         });
