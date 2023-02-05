@@ -1,0 +1,11 @@
+.App {
+  text-align: center;
+}
+
+.content {
+  display: flex;
+  background-color: bisque;
+  justify-content: space-between;
+  height: 80vh;
+}
+

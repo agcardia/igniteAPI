@@ -1,0 +1,18 @@
+.topbar {
+    display: flex;
+    border-color: black;
+    justify-content: space-between;
+    height: 15vh;
+}
+
+.appicon {
+    background-color:blue;
+    flex-basis:80%;
+}
+
+.loginbutton {
+    background-color:purple;
+    flex-grow:1;
+}
+
+
