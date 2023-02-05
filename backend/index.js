@@ -1,13 +1,13 @@
 const express = require('express');
 const connectDB = require('./models/connectDB');
-const invoice = require('./routes/invoice');
+const expense = require('./routes/expense');
 const router = express.Router();
 const Expense = require('./models/expenseModel');
 
 app=express();
 app.use(express.json());
 
-app.use('/invoice',invoice);
+app.use('/expense',expense);
 
 connectDB();
 app.listen(3000, () =>  { 

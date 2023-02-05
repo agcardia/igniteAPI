@@ -31,9 +31,41 @@ router.post('/',async (req,res) => {
     }
     catch (error) {
         res.status(400).json({
-            error:'Your request could not be processed, try again.'
-        })
+            error:'Error in payload.'
+        });
     }
+});
+
+router.get('/', async (req,res) => {
+    try {
+        console.log(req.params.id);
+        const expenses = await Expense.find({});
+        res.status(200).json({
+            "Results": expenses
+        });
+    }
+    catch (error) {
+        res.status(400).json({
+            error:'Error in query'
+        })
+    };
+});
+
+router.get('/:id', async (req,res) => {
+    try {
+        id = req.params.id;
+        console.log(Expense.findById(id));
+        const expenses = await Expense.findById(id);
+        res.status(200).json({
+            "Results": expenses
+        });
+
+    }
+    catch (error) {
+        res.status(400).json({
+            error:'Error in query'
+        })
+    };
 });
 
 module.exports = router;
