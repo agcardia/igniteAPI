@@ -14,7 +14,6 @@ app.listen(3000, () =>  {
 
 app.post('/invoice', async (req,res) => {
     try {
-        console.log(req.body);
         name = req.body.name;
         date = Date.now();
         amount = parseInt(req.body.amount);
@@ -30,8 +29,6 @@ app.post('/invoice', async (req,res) => {
             paid,
             payMethod
         });
-
-        console.log(expense);
 
         const expenseDoc = await(expense).save();
 
