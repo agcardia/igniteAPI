@@ -4,11 +4,14 @@ const Schema = mongoose.Schema
 
 const invoiceSchema = new Schema({
     name: String,
-    amount: Number,
+    totalAmount: Number,
     date: {type: Date, default: Date.now},
-    description: String,
     project: String,
-    client: String
+    client: String,
+    description: [String],
+    price: [Number],
+    paid: Boolean,
+    sent: Boolean
 })
 
 module.exports = mongoose.model('Invoice',invoiceSchema);
