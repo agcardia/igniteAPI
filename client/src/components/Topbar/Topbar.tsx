@@ -16,7 +16,10 @@ const Topbar = () => {
 
   const handleClose = () => {
     setAnchorEl(null);
+
   }
+
+  const pages = ["Revenue","Expenses","Invoices","Reciepts"];
 
   return (
     <div>
@@ -38,10 +41,11 @@ const Topbar = () => {
         'aria-labelledby':'basic-button',
        }}
        >
-        <MenuItem onClick={handleClose}>Revenue</MenuItem>
-        <MenuItem onClick={handleClose}>Expenses</MenuItem>
-        <MenuItem onClick={handleClose}>Reciepts</MenuItem>
-        <MenuItem onClick={handleClose}>Invoices</MenuItem>
+        {pages.map((page) =>
+          <MenuItem onClick={handleClose}>
+            <Button href={`/${page}`}>{page}</Button>
+          </MenuItem>
+        )};
       </Menu>
 
     </div>

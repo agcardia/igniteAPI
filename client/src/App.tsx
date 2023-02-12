@@ -1,12 +1,20 @@
 import React from 'react';
 import './App.css';
 import Topbar from './components/Topbar/Topbar';
+import { BrowserRouter,Routes,Route } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <Topbar/>
-    </div>
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Topbar/>}>
+        <Route path="Expenses"></Route>
+        <Route path="Revenue"></Route>
+        <Route path="Invoices"></Route>
+        <Route path="Reciepts"></Route>
+      </Route>
+    </Routes>
+    </BrowserRouter>
   );
 }
 
