@@ -1,13 +1,12 @@
 import React from 'react';
 import './App.css';
-import Topbar from './components/Topbar/Topbar';
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
 
 function App() {
   return (
     <BrowserRouter>
     <Routes>
-      <Route path="/" element={<Topbar/>}>
+      <Route path="/">
         <Route path="Expenses"></Route>
         <Route path="Revenue"></Route>
         <Route path="Invoices"></Route>
