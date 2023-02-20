@@ -9,9 +9,9 @@ import './AddExpense.css';
 
 const AddExpense = () => {
 
-  const [payDate,setPayDate] = useState<Date|null>(null);
+  const [payDate,setPayDate] = useState<Date>(new Date());
 
-  const handleChange = (date: Date|null) => {
+  const handleChange = (date: Date) => {
     setPayDate(date);
   }
 
@@ -44,7 +44,9 @@ const AddExpense = () => {
           Select a Date
             <DatePicker
               selected={payDate}
-              onChange={setPayDate}
+              onChange={(date:Date, event: React.SyntheticEvent<any>) =>
+                setPayDate(date)
+              }
               name="date"
               dateFormat="MM/dd/yyyy"
               customInput={<CustomInput/>}
