@@ -16,17 +16,15 @@ const AddRevenue = () => {
 
   return (
      <Form>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Form.Group className="mb-3" controlId="revenueName">
         <Form.Label>Name</Form.Label>
-        <Form.Control type="text" placeholder="Enter expense name" />
+        <Form.Control type="text" placeholder="Enter revenue name" />
       </Form.Group>
-
-      <Form.Group className="mb-3" controlId="formBasicPassword">
+      <Form.Group className="mb-3" controlId="revenueAmount">
         <Form.Label>Amount</Form.Label>
         <Form.Control type="text" placeholder="Amount ($)" />
       </Form.Group>
-
-      <Form.Group className="mb-3">
+      <Form.Group className="mb-3" controlId="revenueDate">
         <Form.Label>Date</Form.Label>
         <DatePicker
           selected={payDate}
@@ -35,31 +33,16 @@ const AddRevenue = () => {
           dateFormat="MM/dd/yyyy"
         />
       </Form.Group>
-
-      <Form.Label>Paid</Form.Label>
-        <Form.Check
-              type="radio"
-              label="Yes"
-              name="paid"
-              id="paidYes"
-              value="true"
-        />
-        <Form.Check
-              type="radio"
-              label="No"
-              name="paid"
-              id="paidNo"
-              value="false"
-        />
-
-      <Form.Select aria-label="paymethod">
-      <option>Paymethod</option>
-      <option value="venmo">Venmo</option>
-      <option value="creditcard">Credit Card</option>
-      <option value="check">Check</option>
-    </Form.Select>
-
-    <></>
+      <Form.Group className="mb-3" controlId="revenueDescription">
+        <Form.Label>Description</Form.Label>
+        <Form.Control type="text" placeholder="Amount ($)" />
+      </Form.Group>
+      <Form.Select id="revenuePaymethod" aria-label="revenuePaymethod">
+        <option>Paymethod</option>
+        <option value="venmo">Venmo</option>
+        <option value="creditcard">Credit Card</option>
+        <option value="check">Check</option>
+      </Form.Select>
       <Button variant="primary" type="submit">
         Submit
       </Button>

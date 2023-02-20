@@ -3,7 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import React from 'react';
-import {Outlet, Link} from 'react-router-dom';
+import {Outlet} from 'react-router-dom';
 import './Topbar.css';
 
 const Topbar = () => {
@@ -20,8 +20,14 @@ const Topbar = () => {
                     <NavDropdown.Item href="/expense/add">Add Expenses</NavDropdown.Item>
                     <NavDropdown.Item href="/expense/view">View Expenses</NavDropdown.Item>
                 </NavDropdown>
-                <Nav.Link href="/invoice" className="navitem">Invoices</Nav.Link>
-                <Nav.Link href="reciept" className="navitem">Reciepts</Nav.Link>
+                <NavDropdown title="Invoice" id="basic-nav-dropdown" className="navitem">
+                    <NavDropdown.Item href="/invoice/add">Add Invoice</NavDropdown.Item>
+                    <NavDropdown.Item href="/invoice/view">View Invoices</NavDropdown.Item>
+                </NavDropdown>
+                <NavDropdown title="Reciept" id="basic-nav-dropdown" className="navitem">
+                    <NavDropdown.Item href="/reciept/add">Add Reciept</NavDropdown.Item>
+                    <NavDropdown.Item href="/reciept/view">View Reciepts</NavDropdown.Item>
+                </NavDropdown>
             </Container>
         </Navbar>
         <Outlet />
