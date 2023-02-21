@@ -4,6 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import React from 'react';
 import {Outlet} from 'react-router-dom';
+import {Coin} from 'react-bootstrap-icons';
 import './Topbar.css';
 
 const Topbar = () => {
@@ -11,7 +12,7 @@ const Topbar = () => {
     <>
         <Navbar className="navbar">
             <Container>
-                <Nav.Link href="/" className="navitem">Home</Nav.Link>
+                <Nav.Link href="/" className="homeitem">Home</Nav.Link>
                 <NavDropdown title="Revenue" id="basic-nav-dropdown" className="navitem">
                     <NavDropdown.Item href="/revenue/add">Add Revenues</NavDropdown.Item>
                     <NavDropdown.Item href="/revenue/view">View Revenues</NavDropdown.Item>

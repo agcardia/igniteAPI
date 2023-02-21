@@ -1,0 +1,29 @@
+ .customButton {
+    background-color: rgb(230, 232, 251);
+    color: black;
+    border: 1px solid rgba(80, 80, 80, 0.5);
+    transition: background-color 0.5s ease;
+}
+
+.customButton:hover{
+    background-color:rgb(204, 213, 235) !important;
+}
+
+.expenseForm {
+    width:50vw;
+    background-color: rgb(213, 231, 248);
+    border: 1px solid rgba(80, 80, 80, 0.5);
+    border-top:none;
+    border-radius:0 0 20px 20px;
+    transition: background-color 0.5s ease;
+}
+
+.expenseForm:hover {
+    background-color:rgb(225, 243, 251);
+}
+
+.addExpense {
+    display: flex;
+    flex-direction: row;
+}
+
