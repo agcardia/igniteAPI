@@ -44,7 +44,7 @@ const AddExpense = () => {
       </Row>
       <Row>
       <Form.Group as={Col} className="mb-3" controlId="date">
-        <div>
+        <div className="wrapper">
           Select a Date
             <DatePicker
               selected={payDate}
@@ -84,7 +84,7 @@ const AddExpense = () => {
       </Form.Group>
     </Row>
     <></>
-    <div className="text-center">
+    <div className=" wrapper text-center">
       <Button variant="custom" className="customButton">
         Submit
       </Button>
