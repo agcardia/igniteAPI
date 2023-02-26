@@ -37,7 +37,6 @@ router.post('/',async (req,res) => {
 
 router.get('/', async (req,res) => {
     try {
-        console.log(req.params.id);
         const expenses = await Revenue.find({});
         res.status(200).json({
             "Results": expenses

@@ -1,21 +1,27 @@
+ :root {
+    --border-width: 2px;
+    --border-color: rgba(80,80,80,0.5);
+    --form-color: rgb(213, 231, 248);
+ }
+ 
  .wrapper .customButton {
     background-color: rgb(230, 232, 251);
     color: black;
-    border: 1px solid rgba(80, 80, 80, 0.5);
+    border: var(--border-width) solid var(--border-color);
     transition: background-color 0.5s ease;
 }
 
 .wrapper .customButton:hover{
-    background-color:rgb(204, 213, 235);
+    background-color:var(--form-color);
 }
 
 
 .expenseForm {
     width:50vw;
-    background-color: rgb(213, 231, 248);
-    border: 1px solid rgba(80, 80, 80, 0.5);
+    background-color: var(--form-color);
+    border: var(--border-width) solid var(--border-color);
     border-top:none;
-    border-radius:0 0 20px 20px;
+    border-radius:0 0 10px 10px;
     transition: background-color 0.5s ease;
 }
 

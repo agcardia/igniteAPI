@@ -5,6 +5,7 @@ import Topbar from './components/Topbar/Topbar';
 import AddExpense from './components/Expenses/AddExpense/AddExpense';
 import AddRevenue from './components/Revenue/AddRevenue/AddRevenue';
 import AddReciepts from './components/Reciepts/AddReciept/AddReciepts';
+import ViewExpense from './components/Expenses/ViewExpense/ViewExpense';
 
 function App() {
   return (
@@ -12,9 +13,9 @@ function App() {
     <Routes>
       <Route path="/" element={<Topbar/>}>
         <Route path="expense/add" element={<AddExpense/>} />
-        <Route path="expense/view" />
+        <Route path="expense/view" element={<ViewExpense/>}/>
         <Route path="revenue/add" element={<AddRevenue/>}/>
-        <Route path="revenue/view" />
+        <Route path="revenue/view"/>
         <Route path="invoice/add"/>
         <Route path="invoice/view"/>
         <Route path="reciept/add" element={<AddReciepts/>}/>

@@ -36,7 +36,7 @@ router.post('/',async (req,res) => {
 
 router.get('/', async (req,res) => {
     try {
-        console.log(req.params.id);
+        console.log("reuested recieved!");
         const expenses = await Expense.find({});
         res.status(200).json({
             "Results": expenses
