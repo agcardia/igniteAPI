@@ -10,19 +10,24 @@ import Col from 'react-bootstrap/Col';
 
 const AddExpense = () => {
 
+  const [validated,setValidated] = useState<boolean>(false);
   const [payDate,setPayDate] = useState<Date>(new Date());
   const [description, setDescription] = useState<string>('');
   const [payMethod, setPayMethod] = useState<string>('venmo');
   const [name, setName] = useState<string>('');
   const [amount, setAmount] = useState<string>('');
 
-  const handleChange = (date: Date) => {
-    setPayDate(date);
-  }
-
   type CustomInputProps = {
     value?: string;
     onClick?: () => void;
+  };
+
+  type Expense = {
+    name?:string;
+    amount?:number;
+    payDate?:Date;
+    description?:string;
+    payMethod?:string;
   };
 
   const CustomInput = forwardRef<HTMLButtonElement,CustomInputProps>((props, ref) => {
@@ -31,38 +36,45 @@ const AddExpense = () => {
     );
   });
 
-  type Expense = {
-    name?:string;
-    amount?:number;
-    payDate?:Date;
-    description?:string;
-    payMethod?:string;
-  }
+  const handleChange = (date: Date) => {
+    setPayDate(date);
+  };
 
   const submitExpense = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data:Expense = {
-      name,
-      amount:parseInt(amount,10),
-      payDate,
-      description,
-      payMethod
-    }
-    console.log(data);
-    try {
-      const response = await fetch('http://127.0.0.1:5000/expense', {
-      method: 'POST',
-      headers: {
-        'Content-Type':'application/json'
-      },
-      body: JSON.stringify(data),
-    });
-    if(!response.ok) {
-      throw new Error("failed to add expense to Cloud Database");
-    }
-    console.log('Expense added successfully!');
-    } catch (error) {
-    console.error(error);
+
+
+    const form = event.currentTarget;
+    if (form.checkValidity() === false || isNaN(parseFloat(amount))) {
+      event.preventDefault();
+      event.stopPropagation();
+      setValidated(true);
+    } else { 
+
+      setValidated(true);
+    
+      const data:Expense = {
+        name,
+        amount:parseFloat(amount),
+        payDate,
+        description,
+        payMethod
+      }
+      console.log(data);
+      try {
+        const response = await fetch('http://127.0.0.1:5000/expense', {
+        method: 'POST',
+        headers: {
+          'Content-Type':'application/json'
+        },
+        body: JSON.stringify(data),
+      });
+      if(!response.ok) {
+        throw new Error("failed to add expense to Cloud Database");
+      }
+      console.log('Expense added successfully!');
+      } catch (error) {
+      console.error(error);
+      }
     }
   }
 
@@ -70,23 +82,29 @@ const AddExpense = () => {
   return (
     <>
     <div className="addExpense">
-    <Form className="expenseForm" onSubmit={submitExpense}>
+    <Form noValidate validated={validated} className="expenseForm needs-validation" onSubmit={submitExpense}>
       <Row className="mb3">
         <Form.Group as={Col} className="mb-3" controlId="expenseName">
           <Form.Label className="text-center w-100">Name</Form.Label>
-          <Form.Control 
+          <Form.Control
+            required
+            isInvalid={validated && !name}
             type="text" 
             placeholder="Enter expense name"
             value={name}
-            onChange ={(event:React.ChangeEvent<HTMLInputElement>) => setName(event.target.value)}/>
+            onChange ={(event:React.ChangeEvent<HTMLInputElement>) => setName(event.target.value)} />
+          <Form.Control.Feedback type="invalid">please enter a valid name</Form.Control.Feedback>
         </Form.Group>
         <Form.Group as={Col} className="mb-3" controlId="expenseAmount">
           <Form.Label className="text-center w-100" >Amount</Form.Label>
           <Form.Control 
+          required
           type="text" 
           placeholder="Amount ($)"
           value={amount}
-          onChange ={(event:React.ChangeEvent<HTMLInputElement>) => setAmount(event.target.value)} />
+          isInvalid={validated && isNaN(parseFloat(amount))}
+          onChange ={(event:React.ChangeEvent<HTMLInputElement>) => setAmount(event.target.value)}/>
+          <Form.Control.Feedback type="invalid">please enter a valid amount</Form.Control.Feedback>
         </Form.Group>
       </Row>
       <Row>
@@ -105,15 +123,18 @@ const AddExpense = () => {
       </Form.Group>
       <Form.Group as={Col} className="mb-3" controlId="isPaid">
         <Form.Label className="text-center w-100">Description</Form.Label>
-          <Form.Control 
+          <Form.Control
+          required
+          isInvalid={validated && !description}
           type="text" 
           placeholder="Enter description"
           value={description}
-          onChange = {(event:React.ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)} />
+          onChange = {(event:React.ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)}/>
+        <Form.Control.Feedback type="invalid">please enter a short description</Form.Control.Feedback>
       </Form.Group>
       <Form.Group as={Col} className="mb-3" controlId="payMethod">
-      <Form.Label className="text-center w-100">Pay Method</Form.Label>
-        <Form.Select id="expensePaymethod" aria-label="expensePaymethod">
+        <Form.Label className="text-center w-100">Pay Method</Form.Label>
+          <Form.Select id="expensePaymethod" aria-label="expensePaymethod">
             <option value="venmo">Venmo</option>
             <option value="creditcard">Credit Card</option>
             <option value="check">Check</option>

@@ -15,7 +15,12 @@
 .expense {
     display: flex;
     justify-content: space-evenly;
-    height:85vh;
+    height:7vh;
     border: 1px dashed teal;
+    transition: background-color 0.5s ease;
+}
+
+.expense:hover {
+    background-color:rgb(225, 243, 251);
 }
 
