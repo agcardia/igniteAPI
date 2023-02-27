@@ -1,6 +1,10 @@
 .expenseCard {
     background-color: var(--form-color);
     border: 1px solid var(--border-color);
+    display:grid;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 1px;
 }
 
 .titleCard {
@@ -8,19 +12,42 @@
     border-radius: 0 0 10px 10px;
     height: 5vh;
     text-align:center;
+    grid-row: 1;
+    grid-column: 1/-1;
+}
+
+.header {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    background-color: teal;
+    text-align:center;
+    color: white;
     font-weight: bold;
-}
+    grid-row: 1;
+    grid-column: 1 / -1;
+  }
 
-
-.expense {
-    display: flex;
-    justify-content: space-evenly;
-    height:7vh;
-    border: 1px dashed teal;
+  .rowElement {
+    display: grid !important;
+    grid-template-columns: repeat(5, 1fr);
+    grid-row: auto;
+    grid-column: 1 / -1;
+    align-items: center;
+    height: 7vh;
     transition: background-color 0.5s ease;
-}
+  }
 
-.expense:hover {
+.parent-class .row div {
+    display: inline-block;
+    text-align: center;
+    padding: 0.5rem;
+    box-sizing: border-box;
+  }
+
+.row:hover {
     background-color:rgb(225, 243, 251);
-}
+  }
+
+
+
 

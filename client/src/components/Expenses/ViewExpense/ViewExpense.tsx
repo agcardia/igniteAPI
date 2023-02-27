@@ -15,14 +15,21 @@ const ViewExpense = () => {
   return (
     <div className="expenseCard">
       <div className="titleCard">Recent Expenses</div>
+      <div className="header">
+        <div><b>Name</b></div>
+        <div><b>Amount</b></div>
+        <div><b>Date</b></div>
+        <div><b>Description</b></div>
+        <div><b>Pay Method</b></div>
+      </div>
       {data ? (
         data.map(expense => (
-        <div className="expense" key={expense._id}>
-          <div><b>Name:</b> {expense.name}</div>
-          <div><b>Amount:</b> {expense.amount}</div>
-          <div><b>Date:</b> {expense.date}</div>
-          <div><b>Description:</b> {expense.description}</div>
-          <div><b>Pay Method:</b> {expense.payMethod}</div>
+        <div className="rowElement" key={expense._id}>
+            <div className="column">{expense.name}</div>
+            <div className="column">{expense.amount}</div>
+            <div className="column">{new Date(expense.date).toLocaleDateString()}</div>
+            <div className="column">{expense.description}</div>
+            <div className="column">{expense.payMethod}</div>
         </div>
         ))
       ) : <p>Loading...</p>
