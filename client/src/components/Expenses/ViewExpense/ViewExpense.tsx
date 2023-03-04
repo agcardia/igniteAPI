@@ -12,15 +12,17 @@ const ViewExpense = () => {
         .catch(error => console.log("error in fetch"));
   }, [])
 
+  console.log(data);
+
   return (
     <div className="expenseCard">
       <div className="titleCard">Recent Expenses</div>
       <div className="header">
-        <div><b>Name</b></div>
-        <div><b>Amount</b></div>
-        <div><b>Date</b></div>
-        <div><b>Description</b></div>
-        <div><b>Pay Method</b></div>
+        <div>Name</div>
+        <div>Amount</div>
+        <div>Date</div>
+        <div>Description</div>
+        <div>Pay Method</div>
       </div>
       {data ? (
         data.map(expense => (
