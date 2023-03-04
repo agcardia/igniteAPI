@@ -1,3 +1,33 @@
+.main {
+  display: flex;
+  flex-direction: row;
+}
+
+.graphs {
+  width:50vw;
+  height: 90vh;
+  display:flex;
+  flex-direction: column;
+  background-color: var(--form-color);
+}
+
+.graph {
+  height: 30vh;
+  width: 50vw;
+  border: 1px solid grey;
+  border-bottom: none;
+  border-radius: 10px;
+}
+
+.graph:hover {
+  background-color:rgb(225, 243, 251);
+}
+
+.tableWrapper {
+  width: 50vw;
+  height: 90vh;
+}
+
 .table {
   background-color: var(--form-color);
   border: 1px solid black;
@@ -6,6 +36,8 @@
 .table tr {
   border: 0.5px solid grey;
 }
+
+
 
 
 

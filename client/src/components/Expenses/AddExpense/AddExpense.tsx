@@ -134,9 +134,7 @@ const AddExpense = () => {
           onChange ={(event:React.ChangeEvent<HTMLInputElement>) => setAmount(event.target.value)}/>
           <Form.Control.Feedback type="invalid">please enter a valid amount</Form.Control.Feedback>
         </Form.Group>
-      </Row>
-      <Row>
-      <Form.Group as={Col}  className="mb-3" controlId="date">
+        <Form.Group as={Col}  sm={2} className="mb-3" controlId="date">
         <div className="wrapper">
           Select a Date
             <DatePicker
@@ -149,6 +147,8 @@ const AddExpense = () => {
             />
         </div>
       </Form.Group>
+      </Row>
+      <Row>
       <Form.Group as={Col} className="mb-3" controlId="isPaid">
         <Form.Label className="text-center w-100">Description</Form.Label>
           <Form.Control
@@ -176,58 +176,7 @@ const AddExpense = () => {
       </Button>
     </div>
     </Form>
-    <ResponsiveContainer width="100%" height="100%">
-      <LineChart width={200} height={200} data={data} 
-      margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}>
-        <CartesianGrid strokeDasharray="3 3"/>
-        <XAxis dataKey="payDate" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Line dataKey="amount"/>
-      </LineChart>
-    </ResponsiveContainer>
     </div>
-    <div className="bottomRow">
-    <ResponsiveContainer width="60%" height="100%">
-      <BarChart width={200} height={200} data={data} 
-      margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}>
-        <CartesianGrid strokeDasharray="3 3"/>
-        <XAxis dataKey="payDate"/>
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="amount" fill="#8884d8"/>
-      </BarChart>
-    </ResponsiveContainer>
-    <ResponsiveContainer width="100%" height="100%">
-      <LineChart width={200} height={200} data={data} 
-      margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}>
-        <CartesianGrid strokeDasharray="3 3"/>
-        <XAxis dataKey="payDate" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Line dataKey="amount"/>
-      </LineChart>
-    </ResponsiveContainer>
-    </div>
-
     </>
   )
 }
