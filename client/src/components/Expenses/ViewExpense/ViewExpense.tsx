@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import './ViewExpense.css'
+import './ViewExpense.css';
+import Table from 'react-bootstrap/Table';
 
 const ViewExpense = () => {
     
@@ -15,28 +16,32 @@ const ViewExpense = () => {
   console.log(data);
 
   return (
-    <div className="expenseCard">
-      <div className="titleCard">Recent Expenses</div>
-      <div className="header">
-        <div>Name</div>
-        <div>Amount</div>
-        <div>Date</div>
-        <div>Description</div>
-        <div>Pay Method</div>
-      </div>
-      {data ? (
-        data.map(expense => (
-        <div className="rowElement" key={expense._id}>
-            <div className="column">{expense.name}</div>
-            <div className="column">{expense.amount}</div>
-            <div className="column">{new Date(expense.date).toLocaleDateString()}</div>
-            <div className="column">{expense.description}</div>
-            <div className="column">{expense.payMethod}</div>
-        </div>
-        ))
-      ) : <p>Loading...</p>
-      }   
-    </div>
+    <>
+    <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Pay Method</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data ? (data.map(expense => (
+            <tr>
+              <td>{expense.name}</td>
+              <td>{expense.amount}</td>
+              <td>{new Date(expense.date).toLocaleDateString()}</td>
+              <td>{expense.description}</td>
+              <td>{expense.payMethod}</td>
+            </tr>
+          ))
+          ) : <p>Loading ...</p>}
+        </tbody>
+      </Table>
+    </>
+
   )
 }
 

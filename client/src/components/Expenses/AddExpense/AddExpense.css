@@ -16,8 +16,7 @@
 }
 
 .expenseForm {
-    width:50vw;
-    height: 30vh;
+    width: 40vw;
     background-color: var(--form-color);
     border: var(--border-width) solid var(--border-color);
     border-top:none;
@@ -32,9 +31,27 @@
 .addExpense {
     display: flex;
     flex-direction: row;
+    height: 32vh;
 }
 
-.form-control-inputBox {
-    background-color: blue;
+.tableWrapper {
+    width: 40vw;
+    word-wrap: break-word;
+    background-color: var(--form-color);
+
 }
+
+ .cardWrapper {
+    width: 40vw;
+    text-align: center;
+}
+
+.bottomRow {
+    display: flex;
+    height: 50vh;
+}
+
+
+
+
 

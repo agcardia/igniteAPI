@@ -1,56 +1,11 @@
-.expenseCard {
-    border: 1px solid var(--border-color);
-    border-right: none;
-    display:grid;
-  
-    grid-template-rows: auto 1fr;
-    grid-template-columns: repeat(5, 1fr);
-    grid-gap: 1px;
+.table {
+  background-color: var(--form-color);
+  border: 1px solid black;
 }
 
-.titleCard {
-    border: 1.5px solid var(--border-color);
-    border-radius: 0 0 10px 10px;
-    height: 5vh;
-    text-align:center;
-    grid-row: 1;
-    grid-column: 1/-1;
+.table tr {
+  border: 0.5px solid grey;
 }
-
-.header {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    background-color: rgb(230, 232, 251);
-    text-align:center;
-    grid-row: 1;
-    grid-column: 1 / -1;
-  }
-
-  .rowElement {
-    display: grid;
-    background-color: var(--form-color);
-    border: var(--border-width) solid var(--border-color);
-    border-bottom:none;
-    box-shadow: 0px -2px 3px 0px var(--border-color);
-    grid-template-columns: repeat(5, 1fr);
-    grid-row: auto;
-    grid-column: 1 / -1;
-    text-align: center;
-    height: 7vh;
-    transition: background-color 0.5s ease;
-  }
-
-.parent-class .row div {
-    display: inline-block;
-    text-align: center;
-    padding: 0.5rem;
-    box-sizing: border-box;
-  }
-
-.rowElement:hover {
-    background-color:rgb(225, 243, 251);
-  }
-
 
 
 
