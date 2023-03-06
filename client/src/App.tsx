@@ -1,28 +1,36 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
-import Topbar from './components/Topbar/Topbar';
-import AddExpense from './components/Expenses/AddExpense/AddExpense';
-import AddRevenue from './components/Revenue/AddRevenue/AddRevenue';
-import AddReciepts from './components/Reciepts/AddReciept/AddReciepts';
-import ViewExpense from './components/Expenses/ViewExpense/ViewExpense';
+import { CssBaseline} from '@mui/material';
+import Topbar from './scenes/global/Topbar';
+import Navbar from './scenes/global/Navbar';
+
 
 function App() {
   return (
-    <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<Topbar/>}>
-        <Route path="expense/add" element={<AddExpense/>} />
-        <Route path="expense/view" element={<ViewExpense/>}/>
-        <Route path="revenue/add" element={<AddRevenue/>}/>
-        <Route path="revenue/view"/>
-        <Route path="invoice/add"/>
-        <Route path="invoice/view"/>
-        <Route path="reciept/add" element={<AddReciepts/>}/>
-        <Route path="reciept/view" />
-      </Route>
-    </Routes>
-    </BrowserRouter>
+    <>
+      <CssBaseline/>
+      <BrowserRouter>
+          <div className="app">
+          <Navbar/>
+          <main className="content">
+            <Topbar />
+              <Routes>
+                <Route path="/" />
+                <Route path="expense/add" />
+                <Route path="expense/view" />
+                <Route path="revenue/add" />
+                <Route path="revenue/view"/>
+                <Route path="invoice/add"/>
+                <Route path="invoice/view"/>
+                <Route path="reciept/add"/>
+                <Route path="reciept/view" />
+              </Routes>
+              <div className="rest"></div>
+              </main>
+        </div>
+            </BrowserRouter>
+    </>
   );
 }
 

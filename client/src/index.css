@@ -3,8 +3,23 @@
 html,
 body,
 #root,
-.app {
+.app,
+.content {
   height: 100%;
   width: 100%;
   font-family: "Source Sans Pro", sans-serif;
 }
+
+.app {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+}
+
+.rest {
+  height: 92vh;
+  width: 92vw;
+  background-color:rgb(252, 252, 252);
+}
+
+
