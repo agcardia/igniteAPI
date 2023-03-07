@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react';
 import {Box, Typography} from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
+import Header from '../../components/Header';
 
 const Expenses = () => {
 
@@ -24,8 +25,11 @@ const Expenses = () => {
     ]
 
     return (
+        <Box m="20px">
+            <Header title="Expenses" subtitle="Your expenses" />
         <Box height="75vh" m="40px 0 0 0">
             <DataGrid getRowId={(row)=>row._id} checkboxSelection rows={data} columns={columns}/>
+        </Box>
         </Box>
     )
 }

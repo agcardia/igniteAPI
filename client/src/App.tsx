@@ -15,7 +15,6 @@ function App() {
           <div className="app">
           <Navbar/>
           <main className="content">
-            <Topbar />
               <Routes>
                 <Route path="/" />
                 <Route path="expense/add" />
