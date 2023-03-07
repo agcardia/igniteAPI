@@ -6,7 +6,7 @@ router.post('/',async (req,res) => {
     try {
         console.log(req.body);
         name = req.body.name;
-        date = Date.now();
+        date = (Date.now()).toLocaleDateString();
         amount = parseInt(req.body.amount);
         description = req.body.description;
         payMethod = req.body.payMethod;

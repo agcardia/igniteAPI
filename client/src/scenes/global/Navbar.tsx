@@ -46,8 +46,7 @@ const Navbar = () => {
   }
 
   return (
-    <Box
-    >
+    <Box>
         <Sidebar>
         <Menu>
           <MenuItem
