@@ -48,7 +48,14 @@ const Navbar = () => {
   return (
     <Box>
         <Sidebar>
-        <Menu>
+        <Menu menuItemStyles = {{
+          button: {
+            '&:hover': {
+              backgroundColor: "lightgrey",
+            }
+          }
+
+        }}>
           <MenuItem
 
             onClick={() => collapseSidebar()}

@@ -3,12 +3,11 @@ import {Box, Typography} from '@mui/material';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import Header from '../../components/Header';
 
-const Expenses = () => {
-
+const Invoice = () => {
     const [data,setData] = useState<Array<any>>([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/expense')
+        fetch('http://localhost:5000/invoice')
             .then(res => res.json())
             .then(data => setData(data.Results))
     },[]);
@@ -17,14 +16,15 @@ const Expenses = () => {
         {field:"_id", headerName:"ID", flex:1},
         {field:"name",headerName:"Name",flex:1},
         {field:"date", headerName:"Date",flex:1},
-        {field:"amount",headerName:"Amount", flex:1},
-        {field:"description", headerName:"Description",flex:1},
-        {field:"payMethod", headerName:"Pay Method",flex:1},
+        {field:"totalAmount",headerName:"Amount", flex:1},
+        {field:"client", headerName:"Client",flex:1},
+        {field:"sent", headerName:"Sent",flex:1},
+        {field:"paid", headerName:"Paid",flex:1},
     ]
 
     return (
         <Box m="20px">
-            <Header title="Expenses" subtitle="All listed expenses" />
+            <Header title="Invoices" subtitle="All invoices" />
             <Box height="75vh" m="40px 0 0 0" sx={{
                 '& .MuiDataGrid-columnHeader': {
                     backgroundColor: "#FAFAFA",
@@ -44,4 +44,5 @@ const Expenses = () => {
     )
 }
 
-export default Expenses
+
+export default Invoice

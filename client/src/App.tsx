@@ -5,6 +5,8 @@ import { CssBaseline} from '@mui/material';
 import Topbar from './scenes/global/Topbar';
 import Navbar from './scenes/global/Navbar';
 import Expenses from './scenes/expenses/Expenses';
+import Revenue from './scenes/revenues/Revenue';
+import Invoice from './scenes/invoices/Invoice';
 
 
 function App() {
@@ -19,9 +21,9 @@ function App() {
                 <Route path="/" />
                 <Route path="expense/add" />
                 <Route path="expense" element={<Expenses />}/>
-                <Route path="revenue/add" />
+                <Route path="revenue" element={<Revenue/>}/>
                 <Route path="revenue/view"/>
-                <Route path="invoice/add"/>
+                <Route path="invoice" element={<Invoice />}/>
                 <Route path="invoice/view"/>
                 <Route path="reciept/add"/>
                 <Route path="reciept/view" />
