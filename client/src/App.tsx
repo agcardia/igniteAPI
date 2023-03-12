@@ -2,11 +2,11 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
 import { CssBaseline} from '@mui/material';
-import Topbar from './scenes/global/Topbar';
 import Navbar from './scenes/global/Navbar';
 import Expenses from './scenes/expenses/Expenses';
 import Revenue from './scenes/revenues/Revenue';
 import Invoice from './scenes/invoices/Invoice';
+import ExpenseForm from './scenes/forms/expenseForm';
 
 
 function App() {
@@ -19,17 +19,16 @@ function App() {
           <main className="content">
               <Routes>
                 <Route path="/" />
-                <Route path="expense/add" />
+                <Route path="expense/add" element={<ExpenseForm/>}/>
                 <Route path="expense" element={<Expenses />}/>
                 <Route path="revenue" element={<Revenue/>}/>
-                <Route path="revenue/view"/>
+                <Route path="revenue/add"/>
                 <Route path="invoice" element={<Invoice />}/>
-                <Route path="invoice/view"/>
+                <Route path="invoice/add"/>
                 <Route path="reciept/add"/>
-                <Route path="reciept/view" />
+                <Route path="reciept" />
               </Routes>
-              <div className="rest"></div>
-              </main>
+          </main>
         </div>
             </BrowserRouter>
     </>

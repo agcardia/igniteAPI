@@ -29,9 +29,9 @@ const Navbar = () => {
                 icon:any;
                 selected:string; 
                 setSelected:React.Dispatch<React.SetStateAction<string>>}) => {
-                  console.log(input)
+                  
     return(
-      <Box color="#11434B !important">
+      <Box color="#11434B !important" width="100%">
       <Link to={input.to} style={{textDecoration:"none", color:"inherit"}}>
         <MenuItem 
           active = {selected === input.title}
