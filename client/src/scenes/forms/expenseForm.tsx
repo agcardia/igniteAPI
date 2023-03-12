@@ -1,12 +1,12 @@
-import {Box, TextField, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Button, Typography} from '@mui/material';
+import {Box, TextField, Select, Menu, MenuItem, Button, Typography, InputLabel, FormControl} from '@mui/material';
 import {useState} from 'react';
 import Header from '../../components/Header';
-import { Formik } from 'formik';
+import { Formik, FormikHelpers } from 'formik';
 import * as yup from 'yup';
 import { FormikValues } from 'formik/dist/types';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import dayjs, { Dayjs } from 'dayjs';
 import { NullLiteral } from 'typescript';
 
@@ -16,37 +16,64 @@ const ExpenseForm = () => {
     const [date, setDate] = useState<Dayjs | null>(null);
     const [description, setDescription] = useState<string>("");
     const [method,setMethod] = useState<string>("");
-    const [amount, setAmount] = useState<string>("") 
-
-    const handleFormSubmit = (data:FormikValues) => {
-        console.log("submit");
-    }
+    const [amount, setAmount] = useState<string>("");
 
     const initialValues = {
         name:"",
-        date: null as Dayjs|null,
         description:"",
         amount:"",
-        payMethod:""
-    }
+        payMethod:"",
+        date: dayjs(),
+    };
 
     const handleDateChange = (newValue: Dayjs | null) => {
-        setDate(newValue);
+        setDate(newValue ?? null);
       };
+
+    const dayjsValidation = (value: any) => {
+        if (!dayjs.isDayjs(value)) {
+           return false;
+        }
+        return true;
+      };
+
+    const handleFormSubmit = async (values:any, {setSubmitting}:FormikHelpers<any>) => {
+        values.date = date?.toDate();
+        console.log(values);
+
+        try {
+            const response = await fetch('http://127.0.0.1:5000/expense', {
+            method: 'POST',
+            headers: {
+              'Content-Type':'application/json'
+            },
+            body: JSON.stringify(values),
+          });
+          if(!response.ok) {
+            throw new Error("failed to add expense to Cloud Database");
+          }
+          console.log('Expense added successfully!');
+          } catch (error) {
+          console.error(error);
+          }
+    };
 
     const amountRegex = /^\d+$/;
 
     const revenueValidation = yup.object().shape({
 
         name: yup.string().required("required"),
-        date: yup.string().required("required"),
         description: yup.string().required("required"),
         amount: yup
                 .string()
                 .matches(amountRegex,'enter a valid amount')
                 .required("required"),
         payMethod: yup.string().required("required"),
-    })
+        date: yup.mixed()
+                .test("is-dayjs", "Invalid date", dayjsValidation)
+                .nullable()
+                .required("Date is required"),     
+    });
 
     return (
     <Box m="20px" >
@@ -99,29 +126,34 @@ const ExpenseForm = () => {
                             error={!!touched.description && !!errors.description}
                             sx ={{gridColumn:"span 4"}}
                         />
-                        <Box sx={{gridColumn: "span 2", textAlign:"center"}}>
-                      
-                                <Typography>Pay Method</Typography>
-                                <RadioGroup
-                                    defaultValue="venmo"
-                                    name="payMethod"
-                                    value={values.payMethod}
-                                    onChange = {(e:React.ChangeEvent<HTMLInputElement>)=>setMethod(e.target.value)}
-                                >
-                                    <FormControlLabel value="venmo" control={<Radio />} label="Venmo" />
-                                    <FormControlLabel value="credit card" control={<Radio />} label="Credit Card" />
-                                    <FormControlLabel value="check" control={<Radio />} label="Check" />
-                                </RadioGroup>
+                        <Box sx={{gridColumn:"span 2", 
+                                  textAlign:"center",
+                                  '& .MuiFormControl-root': {
+                                    width: "45%"
+                                  }}}>
+                        <FormControl>
+                        <InputLabel id="demo-simple-select-label">Pay Method</InputLabel>
+                        <Select
+                            labelId="payMethod"
+                            id="payMethod"
+                            value={values.payMethod}
+                            label="payMethod"
+                            onChange={handleChange}
+                            name="payMethod"
+                        >
+                            <MenuItem value={"venmo"}>Venmo</MenuItem>
+                            <MenuItem value={"credit card"}>Credit Card</MenuItem>
+                            <MenuItem value={"check"}>Check</MenuItem>
+                        </Select>
+                        </FormControl>
                         </Box>
-                        <Box sx={{gridColumn: "span 2", textAlign:"center"}}>  
-                            <Typography>Select a Day</Typography>
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <DatePicker
-                                    value={values.date}
-                                    onChange={handleDateChange}
-                          
-                                />
-                            </LocalizationProvider>
+                        <Box sx={{gridColumn:"span 2", textAlign:"center"}}>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <DesktopDatePicker label="Choose a Date" 
+                            value={date} 
+                            onChange={(event:Dayjs|null)=>setDate(event)}
+                            />
+                        </LocalizationProvider>
                         </Box>
                         <Box sx={{gridColumn:"span 4", textAlign:"center"}}>
                             <Button type="submit" variant="contained">

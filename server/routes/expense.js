@@ -4,9 +4,9 @@ const Expense = require('../models/expenseModel');
 
 router.post('/',async (req,res) => {
     try {
-        console.log(req.body);
         name = req.body.name;
-        date = (Date.now()).toLocaleDateString();
+        date = new Date(req.body.date);
+        console.log(date);
         amount = parseInt(req.body.amount);
         description = req.body.description;
         payMethod = req.body.payMethod;
@@ -18,6 +18,8 @@ router.post('/',async (req,res) => {
             description,
             payMethod
         });
+
+        console.log(expense);
 
         const expenseDoc = await(expense).save();
 
