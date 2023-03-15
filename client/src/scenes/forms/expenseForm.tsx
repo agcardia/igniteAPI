@@ -37,7 +37,7 @@ const ExpenseForm = () => {
         return true;
       };
 
-    const handleFormSubmit = async (values:any, {setSubmitting}:FormikHelpers<any>) => {
+    const handleFormSubmit = async (values:any, helpers:FormikHelpers<any>) => {
         values.date = date?.toDate();
         console.log(values);
 
@@ -53,6 +53,7 @@ const ExpenseForm = () => {
             throw new Error("failed to add expense to Cloud Database");
           }
           console.log('Expense added successfully!');
+          helpers.resetForm();
           } catch (error) {
           console.error(error);
           }
@@ -83,7 +84,7 @@ const ExpenseForm = () => {
             validationSchema={revenueValidation}
             initialValues = {initialValues}
         >
-            {({values, errors, touched, handleBlur, handleChange, handleSubmit}) => (
+            {({values, errors, touched, handleBlur, handleChange, handleSubmit, handleReset}) => (
                 <form onSubmit={handleSubmit}>
                     <Box 
                         display="grid" 
@@ -156,7 +157,7 @@ const ExpenseForm = () => {
                         </LocalizationProvider>
                         </Box>
                         <Box sx={{gridColumn:"span 4", textAlign:"center"}}>
-                            <Button type="submit" variant="contained">
+                            <Button type="submit" onSubmit = {handleReset} variant="contained">
                                 Create New Expense
                             </Button>
                         </Box>
