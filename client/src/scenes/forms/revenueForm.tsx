@@ -1,4 +1,5 @@
-import {Box, TextField, Select, Menu, MenuItem, Button, Typography, InputLabel, FormControl} from '@mui/material';
+import {Box, TextField, Select, Menu, MenuItem, Button, RadioGroup, InputLabel, FormControl, FormControlLabel, FormLabel} from '@mui/material';
+import Radio from '@mui/material/Radio';
 import {useState} from 'react';
 import Header from '../../components/Header';
 import { Formik, FormikHelpers } from 'formik';
@@ -10,7 +11,7 @@ import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import dayjs, { Dayjs } from 'dayjs';
 import { NullLiteral } from 'typescript';
 
-const ExpenseForm = () => {
+const RevenueForm = () => {
 
     const [name,setName] = useState<string>("");
     const [date, setDate] = useState<Dayjs | null>(null);
@@ -20,7 +21,7 @@ const ExpenseForm = () => {
 
     const initialValues = {
         name:"",
-        description:"",
+        invoiced:false,
         amount:"",
         payMethod:"",
         date: dayjs(),
@@ -78,7 +79,7 @@ const ExpenseForm = () => {
 
     return (
     <Box m="20px" >
-        <Header title="Add Expense" subtitle="Add a New Expense Entry"/>
+        <Header title="Add Revenue" subtitle="Add a New Revenue Entry"/>
         <Formik
             onSubmit={handleFormSubmit}
             validationSchema={revenueValidation}
@@ -115,18 +116,6 @@ const ExpenseForm = () => {
                             error={!!touched.amount && !!errors.amount}
                             sx ={{gridColumn:"span 2"}}
                         />
-                        <TextField 
-                            fullWidth 
-                            variant="filled" 
-                            type="text"             
-                            label="Description" 
-                            onBlur={handleBlur}
-                            onChange={handleChange}
-                            value={values.description}
-                            name="description"
-                            error={!!touched.description && !!errors.description}
-                            sx ={{gridColumn:"span 4"}}
-                        />
                         <Box sx={{gridColumn:"span 2", 
                                   textAlign:"center",
                                   '& .MuiFormControl-root': {
@@ -148,6 +137,17 @@ const ExpenseForm = () => {
                         </Select>
                         </FormControl>
                         </Box>
+                        <Box sx={{gridColumn:" span 2", textAlign:"center"}}>
+                            <FormLabel>Invoiced</FormLabel>
+                            <RadioGroup
+                                name="invoiced"
+                                value={values.invoiced}
+                                onChange={handleChange}
+                            >
+                                <FormControlLabel value={false} control={<Radio />} label="No" />
+                                <FormControlLabel value={true} control={<Radio />} label="Yes" />
+                            </RadioGroup>
+                        </Box>
                         <Box sx={{gridColumn:"span 2", textAlign:"center"}}>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DesktopDatePicker label="Choose a Date" 
@@ -155,6 +155,17 @@ const ExpenseForm = () => {
                             onChange={(event:Dayjs|null)=>setDate(event)}
                             />
                         </LocalizationProvider>
+                        </Box>
+                        <Box sx={{gridColumn:" span 2", textAlign:"center"}}>
+                            <FormLabel>Paid</FormLabel>
+                            <RadioGroup
+                                name="paid"
+                                value={values.invoiced}
+                                onChange={handleChange}
+                            >
+                                <FormControlLabel value={false} control={<Radio />} label="No" />
+                                <FormControlLabel value={true} control={<Radio />} label="Yes" />
+                            </RadioGroup>
                         </Box>
                         <Box sx={{gridColumn:"span 4", textAlign:"center"}}>
                             <Button type="submit" onSubmit = {handleReset} variant="contained">
@@ -168,6 +179,4 @@ const ExpenseForm = () => {
     </Box>);
 }
 
-export default ExpenseForm;
-
-
+export default RevenueForm;
