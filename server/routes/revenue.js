@@ -5,7 +5,7 @@ const Revenue = require('../models/revenueModel');
 router.post('/',async (req,res) => {
     try {
         name = req.body.name;
-        date = (Date.now()).toLocaleDateString();
+        date = new Date(req.body.date);
         amount = parseInt(req.body.amount);
         invoiced = req.body.invoiced;
         paid = req.body.paid;

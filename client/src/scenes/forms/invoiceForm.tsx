@@ -11,7 +11,7 @@ import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import dayjs, { Dayjs } from 'dayjs';
 
 
-const RevenueForm = () => {
+const InvoiceForm = () => {
 
     const [name,setName] = useState<string>("");
     const [date, setDate] = useState<Dayjs | null>(null);
@@ -183,4 +183,4 @@ const RevenueForm = () => {
     </Box>);
 }
 
-export default RevenueForm;
+export default InvoiceForm;
