@@ -20,11 +20,14 @@ const InvoiceForm = () => {
 
     const initialValues = {
         name:"",
-        amount:"",
-        payMethod:"",
-        invoiced:false,
+        totalAmount:"",
         date: dayjs(),
+        project:"",
+        client:"",
+        description:"",
+        price:"",
         paid:false,
+        sent:false,
     };
 
     const handleDateChange = (newValue: Dayjs | null) => {
@@ -66,22 +69,26 @@ const InvoiceForm = () => {
     const revenueValidation = yup.object().shape({
 
         name: yup.string().required("required"),
-        amount: yup
+        totalAmount: yup
                 .string()
                 .matches(amountRegex,'enter a valid amount')
                 .required("required"),
-        payMethod: yup.string().required("required"),
         date: yup.mixed()
                 .test("is-dayjs", "Invalid date", dayjsValidation)
                 .nullable()
                 .required("Date is required"),
+        project: yup.string().required("required"),
+        client: yup.string().required("required"),
         invoiced: yup.boolean().required("required"),
+        description: yup.string().required("required"),
+        price: yup.string().required("required"),
         paid: yup.boolean().required("required"),
+        sent: yup.boolean().required("required"),
     });
 
     return (
     <Box m="20px" >
-        <Header title="Add Revenue" subtitle="Add a New Revenue Entry"/>
+        <Header title="Make Invoice" subtitle="Make a New Invoice"/>
         <Formik
             onSubmit={handleFormSubmit}
             validationSchema={revenueValidation}
@@ -113,44 +120,47 @@ const InvoiceForm = () => {
                             label="Amount" 
                             onBlur={handleBlur}
                             onChange={handleChange}
-                            value={values.amount}
-                            name="amount"
-                            error={!!touched.amount && !!errors.amount}
+                            value={values.totalAmount}
+                            name="totalAmount"
+                            error={!!touched.totalAmount && !!errors.totalAmount}
                             sx ={{gridColumn:"span 2"}}
                         />
-                        <Box sx={{gridColumn:"span 1", 
-                                  textAlign:"left",
-                                  '& .MuiFormControl-root': {
-                                    width: "45%"
-                                  }}}>
-                        <FormControl>
-                        <InputLabel id="demo-simple-select-label">Pay Method</InputLabel>
-                        <Select
-                            labelId="payMethod"
-                            id="payMethod"
-                            value={values.payMethod}
-                            label="payMethod"
+                         <TextField 
+                            fullWidth 
+                            variant="filled" 
+                            type="text"             
+                            label="Price" 
+                            onBlur={handleBlur}
                             onChange={handleChange}
-                            name="payMethod"
-                        >
-                            <MenuItem value={"venmo"}>Venmo</MenuItem>
-                            <MenuItem value={"credit card"}>Credit Card</MenuItem>
-                            <MenuItem value={"check"}>Check</MenuItem>
-                        </Select>
-                        </FormControl>
-                        </Box>
-                        <Box sx={{gridColumn:" span 1", textAlign:"left"}}>
-                            <FormLabel>Invoiced</FormLabel>
-                            <RadioGroup
-                                name="invoiced"
-                                value={values.invoiced}
-                                onChange={handleChange}
-                                id="invoiced"
-                            >
-                                <FormControlLabel value={false} control={<Radio />} label="No" />
-                                <FormControlLabel value={true} control={<Radio />} label="Yes" />
-                            </RadioGroup>
-                        </Box>
+                            value={values.price}
+                            name="price"
+                            error={!!touched.price && !!errors.price}
+                            sx ={{gridColumn:"span 2"}}
+                        />
+                        <TextField 
+                            fullWidth 
+                            variant="filled" 
+                            type="text"             
+                            label="Description" 
+                            onBlur={handleBlur}
+                            onChange={handleChange}
+                            value={values.description}
+                            name="description"
+                            error={!!touched.description && !!errors.description}
+                            sx ={{gridColumn:"span 2"}}
+                        />
+                        <TextField 
+                            fullWidth 
+                            variant="filled" 
+                            type="text"             
+                            label="Client" 
+                            onBlur={handleBlur}
+                            onChange={handleChange}
+                            value={values.client}
+                            name="client"
+                            error={!!touched.client && !!errors.client}
+                            sx ={{gridColumn:"span 1"}}
+                        />
                         <Box sx={{gridColumn:"span 1", textAlign:"left"}}>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DesktopDatePicker label="Choose a Date" 
@@ -163,8 +173,21 @@ const InvoiceForm = () => {
                             <FormLabel>Paid</FormLabel>
                             <RadioGroup
                                 name="paid"
-                                id="paid"
                                 value={values.paid}
+                                onChange={handleChange}
+                                id="paid"
+                            >
+                                <FormControlLabel value={false} control={<Radio />} label="No" />
+                                <FormControlLabel value={true} control={<Radio />} label="Yes" />
+                            </RadioGroup>
+                        </Box>
+        
+                        <Box sx={{gridColumn:" span 1", textAlign:"left"}}>
+                            <FormLabel>Sent</FormLabel>
+                            <RadioGroup
+                                name="sent"
+                                id="sent"
+                                value={values.sent}
                                 onChange={handleChange}
                             >
                                 <FormControlLabel value={false} control={<Radio />} label="No" />
@@ -173,7 +196,7 @@ const InvoiceForm = () => {
                         </Box>
                         <Box sx={{gridColumn:"span 4", textAlign:"center"}}>
                             <Button type="submit" onSubmit = {handleReset} variant="contained">
-                                Create New Revenue
+                                Create New Invoice
                             </Button>
                         </Box>
                     </Box>

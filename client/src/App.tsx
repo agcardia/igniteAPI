@@ -8,6 +8,7 @@ import Revenue from './scenes/revenues/Revenue';
 import Invoice from './scenes/invoices/Invoice';
 import ExpenseForm from './scenes/forms/expenseForm';
 import RevenueForm from './scenes/forms/revenueForm';
+import InvoiceForm from './scenes/forms/invoiceForm';
 
 
 function App() {
@@ -25,7 +26,7 @@ function App() {
                 <Route path="revenue" element={<Revenue/>}/>
                 <Route path="revenue/add" element={<RevenueForm/>}/>
                 <Route path="invoice" element={<Invoice />}/>
-                <Route path="invoice/add"/>
+                <Route path="invoice/add" element={<InvoiceForm/>}/>
                 <Route path="reciept/add"/>
                 <Route path="reciept" />
               </Routes>
