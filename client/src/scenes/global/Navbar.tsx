@@ -7,13 +7,8 @@ import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import DescriptionIcon from '@mui/icons-material/Description';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
-import CreateIcon from '@mui/icons-material/Create';
-import TimelineIcon from '@mui/icons-material/Timeline';
-import PieChartIcon from '@mui/icons-material/PieChart';
-import BarChartIcon from '@mui/icons-material/BarChart';
 import PersonIcon from '@mui/icons-material/Person';
 import RequestPageIcon from '@mui/icons-material/RequestPage';
-import ArticleIcon from '@mui/icons-material/Article';
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import PointOfSaleIcon from '@mui/icons-material/PointOfSale';
 
@@ -135,30 +130,6 @@ const Navbar = () => {
               title="Revenue"
               to="/revenue/add"
               icon = {<CurrencyExchangeIcon/>}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Typography color="#11434B" align="left" sx={{ml:"20px"}}>
-              Graphs
-            </Typography>
-            <Item
-              title="Line Charts"
-              to="/line"
-              icon = {<TimelineIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Bar Charts"
-              to="/bar"
-              icon = {<BarChartIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Pie Charts"
-              to="/pie"
-              icon = {<PieChartIcon />}
               selected={selected}
               setSelected={setSelected}
             />

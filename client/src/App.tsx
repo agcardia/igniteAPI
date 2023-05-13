@@ -9,6 +9,7 @@ import ExpenseForm from './scenes/forms/expenseForm';
 import RevenueForm from './scenes/forms/revenueForm';
 import InvoiceForm from './scenes/forms/invoiceForm';
 import LineGraph from './scenes/graphs/LineGraph';
+import Dashboard from './scenes/dashboard/Dashboard';
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
           <Navbar/>
           <main className="content">
               <Routes>
-                <Route path="/" />
+                <Route path="/" element={<Dashboard/>}/>
                 <Route path="expense/add" element={<ExpenseForm/>}/>
                 <Route path="expense" element={<Expenses />}/>
                 <Route path="revenue" element={<Revenue/>}/>s
