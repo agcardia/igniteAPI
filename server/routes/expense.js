@@ -4,9 +4,9 @@ const Expense = require('../models/expenseModel');
 
 router.post('/',async (req,res) => {
     try {
-        console.log(req.body);
         name = req.body.name;
-        date = Date.now();
+        date = new Date(req.body.date);
+        console.log(date);
         amount = parseInt(req.body.amount);
         description = req.body.description;
         payMethod = req.body.payMethod;
@@ -18,6 +18,8 @@ router.post('/',async (req,res) => {
             description,
             payMethod
         });
+
+        console.log(expense);
 
         const expenseDoc = await(expense).save();
 
@@ -36,7 +38,6 @@ router.post('/',async (req,res) => {
 
 router.get('/', async (req,res) => {
     try {
-        console.log("reuested recieved!");
         const expenses = await Expense.find({});
         res.status(200).json({
             "Results": expenses
