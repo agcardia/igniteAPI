@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
-import {Box, Typography} from '@mui/material';
-import { DataGrid } from '@mui/x-data-grid';
+import {Box} from '@mui/material';
+import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import Header from '../../components/Header';
 
 const Revenue = () => {
@@ -25,9 +25,21 @@ const Revenue = () => {
 
     return (
         <Box m="20px">
-            <Box height="75vh" m="40px 0 0 0">
-                <Header title="Revenue" subtitle="List of revenue"/>
-                <DataGrid checkboxSelection getRowId ={(row)=>row._id} rows={data} columns={columns}/>
+            <Header title="Revenue" subtitle="List of revenue"/>
+            <Box height="75vh" m="40px 0 0 0" sx={{
+                '& .MuiDataGrid-columnHeader': {
+                    backgroundColor: "#FAFAFA",
+                },
+                '& .MuiDataGrid-toolbarContainer .MuiButton-text': {
+                    color: "#11434B"
+                }
+            }}>
+                <DataGrid getRowId={(row)=>row._id} 
+                        checkboxSelection 
+                        rows={data} 
+                        columns={columns} 
+                        components={{ Toolbar:GridToolbar }}
+                />
             </Box>
         </Box>
     )

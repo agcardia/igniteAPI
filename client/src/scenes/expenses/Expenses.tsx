@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import {Box, Typography} from '@mui/material';
+import {Box} from '@mui/material';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import Header from '../../components/Header';
 
