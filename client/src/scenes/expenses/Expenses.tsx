@@ -12,8 +12,6 @@ const Expenses = () => {
       .then((data) => setData(data.Results));
   }, []);
 
-  console.log(process.env.REACT_APP_BASE_URL);
-
   const columns = [
     { field: '_id', headerName: 'ID', flex: 1 },
     { field: 'name', headerName: 'Name', flex: 1 },

@@ -4,14 +4,18 @@ import {Expense, Revenue} from "./types";
 export const api = createApi({
     baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:5000'}),
     reducerPath: "main",
-    tagTypes : ["Expenses"],
+    tagTypes : ["Expenses",'Revenues'],
     endpoints: (build) => ({
         getExpenses: build.query<Array<Expense>,void>({
             query: () => '/expense',
-            providesTags: ["Expenses"]
+            providesTags: ["Expenses"],
+        }),
+        getRevenues: build.query<Array<Revenue>,void>({
+            query: () => '/revenue',
+            providesTags: ['Revenues'],
         }),
     })
 })
 
-export const { useGetExpensesQuery} = api;
+export const { useGetExpensesQuery, useGetRevenuesQuery} = api;
 
