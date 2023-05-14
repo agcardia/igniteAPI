@@ -16,7 +16,7 @@ export const tokens = {
       200: "#a0f9e9",
       300: "#71f5de",
       400: "#41f2d3",
-      500: "#12efc8",
+      500: "#11434B",
       600: "#0ebfa0",
       700: "#0b8f78",
       800: "#076050",
@@ -50,7 +50,7 @@ export const tokens = {
       primary: {
         ...tokens.primary,
         main: tokens.primary[500],
-        light: tokens.primary[400],
+        light: tokens.grey[100],
       },
       secondary: {
         ...tokens.secondary,
