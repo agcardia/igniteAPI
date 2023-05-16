@@ -18,3 +18,10 @@ export interface Revenue {
     _v: number,
     _id: string
 }
+
+export interface Quote {
+    q: string,
+    a: string,
+    c: string,
+    h: string,
+}
