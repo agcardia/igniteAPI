@@ -1,13 +1,16 @@
 import DashboardBox from '../../components/DashboardBox';
-import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import { Box } from '@mui/material';
-import { useGetExpensesQuery } from '../../state/api';
+import { DataGrid } from '@mui/x-data-grid';
+import { Box, Typography } from '@mui/material';
+import { useGetExpensesQuery, useGetQuotesQuery } from '../../state/api';
 import { useMemo } from 'react';
 import BoxHeader from '../../components/BoxHeader';
+import QuoteBox from '../../components/QuoteBox';
 type Props = {};
 
 const Row3 = (props: Props) => {
   const { data: expenseQueryData } = useGetExpensesQuery();
+  const { data: quoteData } = useGetQuotesQuery();
+  console.log(quoteData);
   const expenseData = useMemo(() => {
     return (
       expenseQueryData &&
@@ -53,7 +56,11 @@ const Row3 = (props: Props) => {
         </Box>
       </DashboardBox>
       <DashboardBox gridArea="i">Weather in SF</DashboardBox>
-      <DashboardBox gridArea="j">Quote of the Day</DashboardBox>
+      <DashboardBox gridArea="j">
+        {quoteData && (
+          <QuoteBox title={quoteData['q']} subtitle={'- ' + quoteData['a']} />
+        )}
+      </DashboardBox>
     </>
   );
 };

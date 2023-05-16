@@ -5,6 +5,7 @@ const router = express.Router();
 const revenue = require('./routes/revenue')
 const invoice = require('./routes/invoice');
 const reciept = require('./routes/reciept');
+const quotes = require('./routes/randomQuote');
 const cors = require('cors');
 
 app=express();
@@ -15,6 +16,7 @@ app.use('/expense',expense);
 app.use('/revenue',revenue);
 app.use('/invoice',invoice);
 app.use('/reciept',reciept);
+app.use('/quote',quotes);
 
 
 connectDB();
