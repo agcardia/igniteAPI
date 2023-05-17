@@ -25,3 +25,10 @@ export interface Quote {
     c: string,
     h: string,
 }
+
+export interface Client {
+    _id: string,
+    name: string,
+    dateAdded: Date,
+    _v: number
+}
