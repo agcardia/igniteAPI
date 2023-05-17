@@ -8,12 +8,7 @@ interface quoteInput {
 const QuoteBox = (props: headerInput) => {
   return (
     <Box mt="10px" height="100%">
-      <Typography
-        variant="h6"
-        align="center"
-        fontweight="bold"
-        sx={{ ml: '10px', mr: '10px' }}
-      >
+      <Typography variant="h6" align="center" sx={{ ml: '10px', mr: '10px' }}>
         {props.title}
       </Typography>
       <Typography

@@ -45,8 +45,6 @@ const Row1 = () => {
     );
   }, [revenueQueryData]);
 
-  console.log(expenseData);
-  console.log(revenueData);
   return (
     <>
       <DashboardBox gridArea="a">
