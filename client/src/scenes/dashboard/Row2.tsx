@@ -1,13 +1,19 @@
 import DashboardBox from '../../components/DashboardBox';
 import { DataGrid } from '@mui/x-data-grid';
 import { Box } from '@mui/material';
-import { useGetRevenuesQuery, useGetClientsQuery } from '../../state/api';
+import {
+  useGetRevenuesQuery,
+  useGetClientsQuery,
+  useGetInvoicesQuery
+} from '../../state/api';
 import { useMemo } from 'react';
 import BoxHeader from '../../components/BoxHeader';
 import { useTheme } from '@mui/material';
 import {
   BarChart,
   Bar,
+  Pie,
+  PieChart,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -19,6 +25,7 @@ import {
 const Row2 = () => {
   const { data: revenueQueryData } = useGetRevenuesQuery();
   const { data: clientQueryData } = useGetClientsQuery();
+  const { data: invoiceQueryData } = useGetInvoicesQuery();
   const { palette } = useTheme();
 
   const clientData = useMemo(() => {
@@ -33,7 +40,20 @@ const Row2 = () => {
     );
   }, [clientQueryData]);
 
-  console.log(clientData && clientData.length);
+  const invoiceData = useMemo(() => {
+    return (
+      invoiceQueryData &&
+      invoiceQueryData.Results.map(({ name, date, paid, _id, client }) => {
+        return {
+          name: name,
+          paid: paid ? 1 : 0,
+          id: _id,
+          client: client,
+          date: date.substring(0, 10)
+        };
+      })
+    );
+  }, [invoiceQueryData]);
 
   const revenueData = useMemo(() => {
     return (
@@ -48,11 +68,19 @@ const Row2 = () => {
     );
   }, [revenueQueryData]);
 
+  console.log(invoiceData);
+
   const columns = [
     { field: 'name', headerName: 'Name', flex: 1 },
     { field: 'date', headerName: 'Date', flex: 1 },
     { field: 'amount', headerName: 'Amount', flex: 1 }
   ];
+
+  const invoiceData2 = [
+    { name: 'Paid', value: invoiceData.filter((item) => item.paid).length },
+    { name: 'Not Paid', value: invoiceData.filter((item) => !item.paid).length }
+  ];
+
   return (
     <>
       <DashboardBox gridArea="d">
@@ -68,7 +96,20 @@ const Row2 = () => {
           </BarChart>
         </ResponsiveContainer>
       </DashboardBox>
-      <DashboardBox gridArea="e">Pie chart invoices sent/paid </DashboardBox>
+      <DashboardBox gridArea="e">
+        <BoxHeader title="Invoices" />
+        <ResponsiveContainer width="100%" height="80%">
+          <PieChart>
+            <Pie
+              data={invoiceData2}
+              dataKey="value"
+              nameKey="name"
+              fill="#8884d8"
+              label
+            />
+          </PieChart>
+        </ResponsiveContainer>
+      </DashboardBox>
       <DashboardBox gridArea="f">
         <BoxHeader title="Recent Income" />
         <Box

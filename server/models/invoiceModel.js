@@ -4,12 +4,10 @@ const Schema = mongoose.Schema
 
 const invoiceSchema = new Schema({
     name: String,
-    totalAmount: Number,
+    amount: Number,
     date: {type: Date, default: Date.now},
-    project: String,
     client: String,
-    description: [String],
-    price: [Number],
+    description: String,
     paid: Boolean,
     sent: Boolean
 })
