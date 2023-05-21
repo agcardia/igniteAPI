@@ -1,4 +1,4 @@
-import FlexBetween from './FlexBetween';
+import FlexCenter from './FlexCenter';
 import { Typography } from '@mui/material';
 
 type Props = {
@@ -7,9 +7,9 @@ type Props = {
 
 const BoxHeader = ({ title }: Props) => {
   return (
-    <FlexBetween ml="40px">
+    <FlexCenter>
       <Typography variant="h6">{title}</Typography>
-    </FlexBetween>
+    </FlexCenter>
   );
 };
 

@@ -44,3 +44,10 @@ export interface Invoice {
     paid: boolean,
     description: string,
 }
+
+export interface Weather {
+    name: string,
+    isDaytime: boolean,
+    temperature: number,
+    shortForecast: string,
+}

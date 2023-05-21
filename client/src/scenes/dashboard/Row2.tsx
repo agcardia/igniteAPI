@@ -1,6 +1,6 @@
 import DashboardBox from '../../components/DashboardBox';
 import { DataGrid } from '@mui/x-data-grid';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import {
   useGetRevenuesQuery,
   useGetClientsQuery,
@@ -9,11 +9,13 @@ import {
 import { useMemo } from 'react';
 import BoxHeader from '../../components/BoxHeader';
 import { useTheme } from '@mui/material';
+import FlexBetween from '../../components/FlexBetween';
 import {
   BarChart,
   Bar,
   Pie,
   PieChart,
+  Cell,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -27,6 +29,7 @@ const Row2 = () => {
   const { data: clientQueryData } = useGetClientsQuery();
   const { data: invoiceQueryData } = useGetInvoicesQuery();
   const { palette } = useTheme();
+  const pieColors = [palette.primary.main, palette.primary.second];
 
   const clientData = useMemo(() => {
     return (
@@ -68,17 +71,21 @@ const Row2 = () => {
     );
   }, [revenueQueryData]);
 
-  console.log(invoiceData);
-
   const columns = [
     { field: 'name', headerName: 'Name', flex: 1 },
     { field: 'date', headerName: 'Date', flex: 1 },
     { field: 'amount', headerName: 'Amount', flex: 1 }
   ];
 
-  const invoiceData2 = [
-    { name: 'Paid', value: invoiceData.filter((item) => item.paid).length },
-    { name: 'Not Paid', value: invoiceData.filter((item) => !item.paid).length }
+  const pieData = [
+    {
+      name: 'Paid',
+      value: invoiceData && invoiceData.filter((item) => item.paid).length
+    },
+    {
+      name: 'Not Paid',
+      value: invoiceData && invoiceData.filter((item) => !item.paid).length
+    }
   ];
 
   return (
@@ -98,17 +105,31 @@ const Row2 = () => {
       </DashboardBox>
       <DashboardBox gridArea="e">
         <BoxHeader title="Invoices" />
-        <ResponsiveContainer width="100%" height="80%">
-          <PieChart>
+        <FlexBetween ml="40px" mr="40px">
+          <PieChart width={180} height={140}>
+            <Legend layout="vertical" verticalAlign="center" align="right" />
             <Pie
-              data={invoiceData2}
+              data={pieData}
               dataKey="value"
-              nameKey="name"
-              fill="#8884d8"
-              label
-            />
+              stroke="none"
+              innerRadius={18}
+              outerRadius={35}
+              labelLine={false}
+            >
+              {pieData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={pieColors[index]} />
+              ))}
+            </Pie>
           </PieChart>
-        </ResponsiveContainer>
+          <Box ml="5px" justifyContent="center">
+            <Typography fontWeight="bold" color={palette.primary.main}>
+              Paid: {pieData[0].value}
+            </Typography>
+            <Typography color={palette.primary.second}>
+              Unpaid: {pieData[1].value}
+            </Typography>
+          </Box>
+        </FlexBetween>
       </DashboardBox>
       <DashboardBox gridArea="f">
         <BoxHeader title="Recent Income" />

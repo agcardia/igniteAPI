@@ -7,6 +7,7 @@ const invoice = require('./routes/invoice');
 const clients = require('./routes/client');
 const reciept = require('./routes/reciept');
 const quotes = require('./routes/randomQuote');
+const weather = require('./routes/weather');
 const cors = require('cors');
 
 app=express();
@@ -19,6 +20,7 @@ app.use('/invoice',invoice);
 app.use('/reciept',reciept);
 app.use('/quote',quotes);
 app.use('/client',clients);
+app.use('/weather',weather);
 
 
 connectDB();
