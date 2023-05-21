@@ -5,26 +5,24 @@ const Invoice = require('../models/invoiceModel');
 router.post('/',async (req,res) => {
     try {
         name = req.body.name;
-        totalAmount = req.body.totalAmount;
+        amount = req.body.amount;
         date = Date.now();
-        project = req.body.project;
         client = req.body.client;
         description = req.body.description;
-        price = req.body.price;
         paid = req.body.paid;
         sent = req.body.sent;
 
         const invoice  = new Invoice({
             name,
-            totalAmount,
+            amount,
             date,
-            project,
             client,
             description,
-            price,
             paid,
             sent
         });
+
+        console.log(invoice);
 
         const invoiceDoc = await(invoice).save();
 

@@ -32,3 +32,22 @@ export interface Client {
     dateAdded: Date,
     _v: number
 }
+
+export interface Invoice {
+    _id: string,
+    _v: number,
+    name: string,
+    date: Date,
+    amount: number,
+    client: string,
+    sent: boolean,
+    paid: boolean,
+    description: string,
+}
+
+export interface Weather {
+    name: string,
+    isDaytime: boolean,
+    temperature: number,
+    shortForecast: string,
+}

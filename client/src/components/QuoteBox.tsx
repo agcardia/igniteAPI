@@ -5,7 +5,7 @@ interface quoteInput {
   subtitle: string;
 }
 
-const QuoteBox = (props: headerInput) => {
+const QuoteBox = (props: quoteInput) => {
   return (
     <Box mt="10px" height="100%">
       <Typography variant="h6" align="center" sx={{ ml: '10px', mr: '10px' }}>
@@ -13,7 +13,7 @@ const QuoteBox = (props: headerInput) => {
       </Typography>
       <Typography
         variant="subtitle1"
-        align="right"
+        align="center"
         sx={{ ml: '10px', mr: '10px', fontStyle: 'italic' }}
       >
         {props.subtitle}

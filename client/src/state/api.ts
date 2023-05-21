@@ -1,10 +1,10 @@
 import { createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {Expense, Revenue, Quote, Client} from "./types";
+import {Expense, Revenue, Quote, Client, Invoice, Weather} from "./types";
 
 export const api = createApi({
     baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:5000'}),
     reducerPath: "main",
-    tagTypes : ["Expenses",'Revenues','Quotes','Clients'],
+    tagTypes : ["Expenses",'Revenues','Quotes','Clients',"Invoices","Weather"],
     endpoints: (build) => ({
         getExpenses: build.query<Array<Expense>,void>({
             query: () => '/expense',
@@ -22,8 +22,16 @@ export const api = createApi({
             query: () => '/client',
             providesTags: ["Clients"],
         }),
+        getInvoices: build.query<Invoice,void>({
+            query: () => '/invoice',
+            providesTags: ["Invoices"]
+        }),
+        getWeather: build.query<Weather,void>({
+            query: () => '/weather',
+            providesTags: ["Weather"],
+        })
     })
 })
 
-export const { useGetExpensesQuery, useGetRevenuesQuery, useGetQuotesQuery, useGetClientsQuery} = api;
+export const { useGetExpensesQuery, useGetRevenuesQuery, useGetQuotesQuery, useGetClientsQuery, useGetInvoicesQuery, useGetWeatherQuery} = api;
 

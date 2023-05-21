@@ -1,13 +1,21 @@
 import DashboardBox from '../../components/DashboardBox';
 import { DataGrid } from '@mui/x-data-grid';
-import { Box } from '@mui/material';
-import { useGetRevenuesQuery, useGetClientsQuery } from '../../state/api';
+import { Box, Typography } from '@mui/material';
+import {
+  useGetRevenuesQuery,
+  useGetClientsQuery,
+  useGetInvoicesQuery
+} from '../../state/api';
 import { useMemo } from 'react';
 import BoxHeader from '../../components/BoxHeader';
 import { useTheme } from '@mui/material';
+import FlexBetween from '../../components/FlexBetween';
 import {
   BarChart,
   Bar,
+  Pie,
+  PieChart,
+  Cell,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -19,7 +27,9 @@ import {
 const Row2 = () => {
   const { data: revenueQueryData } = useGetRevenuesQuery();
   const { data: clientQueryData } = useGetClientsQuery();
+  const { data: invoiceQueryData } = useGetInvoicesQuery();
   const { palette } = useTheme();
+  const pieColors = [palette.primary.main, palette.primary.second];
 
   const clientData = useMemo(() => {
     return (
@@ -33,7 +43,20 @@ const Row2 = () => {
     );
   }, [clientQueryData]);
 
-  console.log(clientData && clientData.length);
+  const invoiceData = useMemo(() => {
+    return (
+      invoiceQueryData &&
+      invoiceQueryData.Results.map(({ name, date, paid, _id, client }) => {
+        return {
+          name: name,
+          paid: paid ? 1 : 0,
+          id: _id,
+          client: client,
+          date: date.substring(0, 10)
+        };
+      })
+    );
+  }, [invoiceQueryData]);
 
   const revenueData = useMemo(() => {
     return (
@@ -53,6 +76,18 @@ const Row2 = () => {
     { field: 'date', headerName: 'Date', flex: 1 },
     { field: 'amount', headerName: 'Amount', flex: 1 }
   ];
+
+  const pieData = [
+    {
+      name: 'Paid',
+      value: invoiceData && invoiceData.filter((item) => item.paid).length
+    },
+    {
+      name: 'Not Paid',
+      value: invoiceData && invoiceData.filter((item) => !item.paid).length
+    }
+  ];
+
   return (
     <>
       <DashboardBox gridArea="d">
@@ -68,7 +103,34 @@ const Row2 = () => {
           </BarChart>
         </ResponsiveContainer>
       </DashboardBox>
-      <DashboardBox gridArea="e">Pie chart invoices sent/paid </DashboardBox>
+      <DashboardBox gridArea="e">
+        <BoxHeader title="Invoices" />
+        <FlexBetween ml="40px" mr="40px">
+          <PieChart width={180} height={140}>
+            <Legend layout="vertical" verticalAlign="center" align="right" />
+            <Pie
+              data={pieData}
+              dataKey="value"
+              stroke="none"
+              innerRadius={18}
+              outerRadius={35}
+              labelLine={false}
+            >
+              {pieData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={pieColors[index]} />
+              ))}
+            </Pie>
+          </PieChart>
+          <Box ml="5px" justifyContent="center">
+            <Typography fontWeight="bold" color={palette.primary.main}>
+              Paid: {pieData[0].value}
+            </Typography>
+            <Typography color={palette.primary.second}>
+              Unpaid: {pieData[1].value}
+            </Typography>
+          </Box>
+        </FlexBetween>
+      </DashboardBox>
       <DashboardBox gridArea="f">
         <BoxHeader title="Recent Income" />
         <Box
