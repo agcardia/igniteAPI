@@ -9,6 +9,7 @@ import {
 import { useMemo } from 'react';
 import BoxHeader from '../../components/BoxHeader';
 import QuoteBox from '../../components/QuoteBox';
+import WeatherDisplay from '../../components/WeatherDisplay';
 type Props = {};
 
 const Row3 = (props: Props) => {
@@ -102,7 +103,10 @@ const Row3 = (props: Props) => {
           />
         </Box>
       </DashboardBox>
-      <DashboardBox gridArea="i">Weather in SF</DashboardBox>
+      <DashboardBox gridArea="i">
+        <BoxHeader title="San Francisco" />
+        <WeatherDisplay title="" temperature={67} day={true} forecast="Sunny" />
+      </DashboardBox>
       <DashboardBox gridArea="j">
         {quoteData && (
           <QuoteBox title={quoteData['q']} subtitle={'- ' + quoteData['a']} />
