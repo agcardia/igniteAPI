@@ -6,11 +6,11 @@ router.post('/',async (req,res) => {
     try {
         console.log(req.body);
         name = req.body.name;
-        date = new Date(req.body.date);
+        dateAdded = new Date(req.body.dateAdded);
 
         const client  = new Client({
             name,
-            date,
+            dateAdded,
         });
 
         const clientDoc = await(client).save();

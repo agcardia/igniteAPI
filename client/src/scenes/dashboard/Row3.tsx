@@ -24,11 +24,13 @@ const Row3 = (props: Props) => {
         return {
           name: name,
           date: dateAdded.substring(0, 10),
-          _id: _id
+          id: _id
         };
       })
     );
   }, [clientQueryData]);
+
+  console.log(clientData);
   const expenseData = useMemo(() => {
     return (
       expenseQueryData &&
@@ -47,12 +49,12 @@ const Row3 = (props: Props) => {
     { field: 'name', headerName: 'Name', flex: 1 },
     { field: 'date', headerName: 'Date', flex: 1 },
     { field: 'amount', headerName: 'Amount', flex: 1 },
-    { field: '_id', headerName: 'id', flex: 1 }
+    { field: 'id', headerName: 'ID', flex: 1 }
   ];
   const clientColumns = [
     { field: 'name', headerName: 'Name', flex: 1 },
-    { field: 'dateAdded', headerName: 'Date', flex: 1 },
-    { field: '_id', headerName: 'id', flex: 1 }
+    { field: 'date', headerName: 'Date', flex: 1 },
+    { field: 'id', headerName: 'ID', flex: 1 }
   ];
 
   return (
@@ -73,7 +75,7 @@ const Row3 = (props: Props) => {
           }}
         >
           <DataGrid
-            getRowId={(row) => row._id}
+            getRowId={(row) => row.id}
             rows={clientData || []}
             columns={clientColumns}
             hideFooter={true}
@@ -105,7 +107,7 @@ const Row3 = (props: Props) => {
       </DashboardBox>
       <DashboardBox gridArea="i">
         <BoxHeader title="San Francisco" />
-        <WeatherDisplay title="" temperature={67} day={true} forecast="Sunny" />
+        <WeatherDisplay  temperature={67} day={true} forecast="Sunny" />
       </DashboardBox>
       <DashboardBox gridArea="j">
         {quoteData && (

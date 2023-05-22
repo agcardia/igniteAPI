@@ -41,6 +41,7 @@ export const tokens = {
     background: {
       light: "#2d2d34",
       main: "#1f2026",
+      grey: "#6b6d74",
     },
   };
   
@@ -65,7 +66,7 @@ export const tokens = {
         main: tokens.grey[500],
       },
       background: {
-        default: tokens.background.main,
+        default: tokens.background.grey,
         light: tokens.background.light,
       },
     },

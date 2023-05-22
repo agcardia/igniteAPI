@@ -4,15 +4,13 @@ import { useGetExpensesQuery, useGetRevenuesQuery } from '../../state/api';
 import { useTheme } from '@mui/material';
 import { useMemo } from 'react';
 import {
-  LineChart,
+  Area,
+  AreaChart,
   BarChart,
   Bar,
-  Line,
   XAxis,
   YAxis,
-  CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer
 } from 'recharts';
 
@@ -50,40 +48,45 @@ const Row1 = () => {
       <DashboardBox gridArea="a">
         <BoxHeader title="Expenses" />
         <ResponsiveContainer width="100%" height="90%">
-          <LineChart
+        <AreaChart
             width={500}
-            height={300}
+            height={400}
             data={expenseData}
             margin={{
-              top: 5,
-              right: 30,
-              left: 20,
-              bottom: 5
+              top: 15,
+              right: 10,
             }}
           >
-            <XAxis dataKey="date" tickLine={false} />
-            <YAxis tickLine={false} />
+            <XAxis
+              dataKey="date"
+              tickLine={false}
+              style={{ fontSize: "14px" }}
+            />
+            <YAxis
+              tickLine={false}
+              axisLine={{ strokeWidth: "1" }}
+              style={{ fontSize: "14px" }}
+            />
             <Tooltip />
-            <Legend />
-            <Line
+            <Area
               type="monotone"
               dataKey="amount"
+              dot={true}
               stroke={palette.primary.main}
-              activeDot={{ r: 8 }}
+              fillOpacity={1}
+              fill={palette.primary.main}
             />
-          </LineChart>
+          </AreaChart>
         </ResponsiveContainer>
       </DashboardBox>
       <DashboardBox gridArea="b">Profit and Revenue</DashboardBox>
       <DashboardBox gridArea="c">
         <BoxHeader title="Revenue" />
         <ResponsiveContainer width="100%" height="90%">
-          <BarChart data={revenueData}>
-            <CartesianGrid strokeDasharray="3 3" />
+          <BarChart data={revenueData}> 
             <XAxis dataKey="date" />
-            <YAxis />
+            <YAxis/>
             <Tooltip />
-            <Legend />
             <Bar dataKey="amount" fill={palette.primary.main} />
           </BarChart>
         </ResponsiveContainer>

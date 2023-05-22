@@ -23,6 +23,7 @@ import {
   Legend,
   ResponsiveContainer
 } from 'recharts';
+import { count } from 'console';
 
 const Row2 = () => {
   const { data: revenueQueryData } = useGetRevenuesQuery();
@@ -43,6 +44,20 @@ const Row2 = () => {
     );
   }, [clientQueryData]);
 
+  const countClients = clientData && clientData.reduce((count,entry) => {
+    const month = new Date(entry.date).toLocaleString('en-US', { month: 'short' });
+    count[month] = (count[month] || 0) +1;
+    return count;
+  },{});
+
+  const countArray = Object.entries(countClients)
+  .map(([month, count]) => ({month,count}))
+  .sort((a, b) => {
+      const monthA = new Date(`2023-${a.month}-01`).getMonth();
+      const monthB = new Date(`2023-${b.month}-01`).getMonth();
+      return monthA - monthB;
+    });
+
   const invoiceData = useMemo(() => {
     return (
       invoiceQueryData &&
@@ -61,11 +76,12 @@ const Row2 = () => {
   const revenueData = useMemo(() => {
     return (
       revenueQueryData &&
-      revenueQueryData.Results.map(({ amount, date, name }) => {
+      revenueQueryData.Results.map(({ amount, date, name, _id }) => {
         return {
           amount: amount,
           name: name,
-          date: date.substring(0, 10)
+          date: date.substring(0, 10),
+          id: _id,
         };
       })
     );
@@ -74,7 +90,8 @@ const Row2 = () => {
   const columns = [
     { field: 'name', headerName: 'Name', flex: 1 },
     { field: 'date', headerName: 'Date', flex: 1 },
-    { field: 'amount', headerName: 'Amount', flex: 1 }
+    { field: 'amount', headerName: 'Amount', flex: 1 },
+    {field: 'id' , headerName: 'ID', flex: 1, hide: true},
   ];
 
   const pieData = [
@@ -91,15 +108,13 @@ const Row2 = () => {
   return (
     <>
       <DashboardBox gridArea="d">
-        <BoxHeader title="Number of Clients" />
+        <BoxHeader title="New Clients" />
         <ResponsiveContainer width="100%" height="90%">
-          <BarChart data={clientData}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="date" />
+          <BarChart data={countArray}>
+            <XAxis dataKey="month" />
             <YAxis />
             <Tooltip />
-            <Legend />
-            <Bar dataKey="date" fill={palette.primary.main} />
+            <Bar dataKey="count" fill={palette.primary.main} />
           </BarChart>
         </ResponsiveContainer>
       </DashboardBox>
@@ -147,7 +162,7 @@ const Row2 = () => {
           }}
         >
           <DataGrid
-            getRowId={(row) => row.date}
+            getRowId={(row) => row.id}
             rows={revenueData || []}
             columns={columns}
             hideFooter={true}
