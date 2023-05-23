@@ -20,9 +20,7 @@ router.post('/',async (req,res) => {
             payMethod
         });
 
-
         const revenueDoc = await(revenue).save();
-        console.log(revenueDoc);
 
         res.status(200).json({
             success: true,

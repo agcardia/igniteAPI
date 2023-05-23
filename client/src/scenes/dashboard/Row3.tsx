@@ -30,7 +30,6 @@ const Row3 = (props: Props) => {
     );
   }, [clientQueryData]);
 
-  console.log(clientData);
   const expenseData = useMemo(() => {
     return (
       expenseQueryData &&
@@ -107,7 +106,7 @@ const Row3 = (props: Props) => {
       </DashboardBox>
       <DashboardBox gridArea="i">
         <BoxHeader title="San Francisco" />
-        <WeatherDisplay  temperature={67} day={true} forecast="Sunny" />
+        <WeatherDisplay temperature={67} day={true} forecast="Sunny" />
       </DashboardBox>
       <DashboardBox gridArea="j">
         {quoteData && (

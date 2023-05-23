@@ -50,7 +50,7 @@ const Row2 = () => {
     return count;
   },{});
 
-  const countArray = Object.entries(countClients)
+  const countArray = countClients && Object.entries(countClients)
   .map(([month, count]) => ({month,count}))
   .sort((a, b) => {
       const monthA = new Date(`2023-${a.month}-01`).getMonth();
