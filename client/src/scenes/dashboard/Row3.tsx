@@ -4,7 +4,8 @@ import { Box } from '@mui/material';
 import {
   useGetExpensesQuery,
   useGetQuotesQuery,
-  useGetClientsQuery
+  useGetClientsQuery,
+  useGetWeatherQuery
 } from '../../state/api';
 import { useMemo } from 'react';
 import BoxHeader from '../../components/BoxHeader';
@@ -16,6 +17,7 @@ const Row3 = (props: Props) => {
   const { data: expenseQueryData } = useGetExpensesQuery();
   const { data: quoteData } = useGetQuotesQuery();
   const { data: clientQueryData } = useGetClientsQuery();
+  const { data: weatherData } = useGetWeatherQuery();
 
   const clientData = useMemo(() => {
     return (
@@ -55,6 +57,8 @@ const Row3 = (props: Props) => {
     { field: 'date', headerName: 'Date', flex: 1 },
     { field: 'id', headerName: 'ID', flex: 1 }
   ];
+
+  console.log(weatherData);
 
   return (
     <>
@@ -106,7 +110,15 @@ const Row3 = (props: Props) => {
       </DashboardBox>
       <DashboardBox gridArea="i">
         <BoxHeader title="San Francisco" />
-        <WeatherDisplay temperature={67} day={true} forecast="Sunny" />
+        {weatherData ? (
+          <WeatherDisplay
+            temperature={weatherData.temperature}
+            day={weatherData.isDaytime}
+            forecast={weatherData.shortForecast}
+          />
+        ) : (
+          <Box />
+        )}
       </DashboardBox>
       <DashboardBox gridArea="j">
         {quoteData && (

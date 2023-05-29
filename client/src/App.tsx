@@ -10,6 +10,7 @@ import ExpenseForm from './scenes/forms/expenseForm';
 import RevenueForm from './scenes/forms/revenueForm';
 import InvoiceForm from './scenes/forms/invoiceForm';
 import Dashboard from './scenes/dashboard/Dashboard';
+import Invoices from './scenes/invoices/Invoices';
 import { themeSettings } from './theme';
 
 function App() {
@@ -26,7 +27,8 @@ function App() {
                 <Route path="/" element={<Dashboard />} />
                 <Route path="expense/add" element={<ExpenseForm />} />
                 <Route path="expense" element={<Expenses />} />
-                <Route path="revenue" element={<Revenue />} />s
+                <Route path="revenue" element={<Revenue />} />
+                <Route path="invoice" element={<Invoices />} />
                 <Route path="revenue/add" element={<RevenueForm />} />
                 <Route path="invoice/add" element={<InvoiceForm />} />
               </Routes>
