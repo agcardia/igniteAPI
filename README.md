@@ -10,5 +10,12 @@ Code repository for a MERN fullstack application to track small business data an
 * Material UI
 * Recharts 
 
+# Application Structure
+pic of frontend and backend stuff plus RTK explanation
+screenshot of application
+
+
+# Deployment 
+enter deployment info here
 
 
