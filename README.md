@@ -12,7 +12,8 @@ Code repository for a MERN fullstack application to track small business data an
 
 # Application Structure
 pic of frontend and backend stuff plus RTK explanation
-screenshot of application
+
+![Text](/Screenshot.png?raw=True)
 
 
 # Deployment 
