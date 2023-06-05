@@ -92,14 +92,6 @@ const Navbar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            <Item
-              title="Clients"
-              to="/clients"
-              icon={<PersonIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-
             <Typography color="#11434B" align="left" sx={{ ml: '20px' }}>
               Data
             </Typography>
@@ -127,6 +119,13 @@ const Navbar = () => {
             <Typography color="#11434B" align="left" sx={{ ml: '20px' }}>
               Add
             </Typography>
+            <Item
+              title="Client"
+              to="/clients"
+              icon={<PersonIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
             <Item
               title="Invoice"
               to="/invoice/add"

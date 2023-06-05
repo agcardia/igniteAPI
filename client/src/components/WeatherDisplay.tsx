@@ -13,16 +13,34 @@ interface Props {
 
 const WeatherDisplay = (props: Props) => {
   const { palette } = useTheme();
-  const temperatureString = `${props.temperature}\u00B0F`
+  const temperatureString = `${props.temperature}\u00B0F`;
   return (
     <>
-      <FlexBetween mt="20px" mr="10px" ml="10px" >
-        <Box>{props.day ? <WbSunnyIcon sx={{fontSize: 60}}/> : <NightlightIcon sx={{fontSize: 60}} />}</Box>
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <ThermostatIcon sx={{fontSize: 60}} /> 
-        <Typography variant="h6" color= {palette.primary.second} fontWeight="bold">{temperatureString}</Typography>
+      <FlexBetween mt="20px" mr="10px" ml="10px">
+        <Box>
+          {props.day ? (
+            <WbSunnyIcon sx={{ fontSize: 60 }} />
+          ) : (
+            <NightlightIcon sx={{ fontSize: 60 }} />
+          )}
         </Box>
-        <Typography variant="h6" color={palette.primary.second} fontWeight="bold">Forecast: {props.forecast}</Typography>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <ThermostatIcon sx={{ fontSize: 60 }} />
+          <Typography
+            variant="h6"
+            color={palette.primary.second}
+            fontWeight="bold"
+          >
+            {temperatureString}
+          </Typography>
+        </Box>
+        <Typography
+          variant="h6"
+          color={palette.primary.second}
+          fontWeight="bold"
+        >
+          {props.forecast}
+        </Typography>
       </FlexBetween>
     </>
   );

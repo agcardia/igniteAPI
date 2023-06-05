@@ -11,6 +11,7 @@ import RevenueForm from './scenes/forms/revenueForm';
 import InvoiceForm from './scenes/forms/invoiceForm';
 import Dashboard from './scenes/dashboard/Dashboard';
 import Invoices from './scenes/invoices/Invoices';
+import ClientForm from './scenes/forms/clientForm';
 import { themeSettings } from './theme';
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
                 <Route path="invoice" element={<Invoices />} />
                 <Route path="revenue/add" element={<RevenueForm />} />
                 <Route path="invoice/add" element={<InvoiceForm />} />
+                <Route path="clients" element={<ClientForm />} />
               </Routes>
             </main>
           </div>

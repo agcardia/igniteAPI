@@ -58,8 +58,6 @@ const Row3 = (props: Props) => {
     { field: 'id', headerName: 'ID', flex: 1 }
   ];
 
-  console.log(weatherData);
-
   return (
     <>
       <DashboardBox gridArea="g">
