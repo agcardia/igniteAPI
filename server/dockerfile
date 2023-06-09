@@ -1,0 +1,14 @@
+FROM node:alpine
+
+WORKDIR /server
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . . 
+
+ARG MONGO_URI_SECRET
+ENV MONGO_URI=$MONGO_URI_SECRET
+
+CMD ["node","index.js"]

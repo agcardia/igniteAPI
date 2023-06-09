@@ -1,0 +1,25 @@
+.dockerignore
+Dockerfile
+.gitignore
+README.md
+
+#node files
+node_modules
+npm-debug.log
+yarn-error.log
+
+#dev files
+.git
+.gitignore
+.vscode
+.idea
+*.md
+Dockerfile
+
+
+#IDE
+.DS_Store
+Thumbs.db
+
+
+
