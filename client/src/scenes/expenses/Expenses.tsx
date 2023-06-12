@@ -1,16 +1,11 @@
-import { useState, useEffect } from 'react';
 import { Box } from '@mui/material';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import Header from '../../components/Header';
+import { useGetExpensesQuery } from '../../state/api';
 
 const Expenses = () => {
-  const [data, setData] = useState<Array<any>>([]);
 
-  useEffect(() => {
-    fetch('http://localhost:5000/expense')
-      .then((res) => res.json())
-      .then((data) => setData(data.Results));
-  }, []);
+  const {data: expenseData} = useGetExpensesQuery();
 
   const columns = [
     { field: '_id', headerName: 'ID', flex: 1 },
@@ -39,11 +34,11 @@ const Expenses = () => {
         <DataGrid
           getRowId={(row) => row._id}
           checkboxSelection
-          rows={data}
+          rows={expenseData?.Results || []}
           columns={columns}
           components={{ Toolbar: GridToolbar }}
         />
-      </Box>
+      </Box> 
     </Box>
   );
 };

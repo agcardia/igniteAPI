@@ -34,7 +34,7 @@ const Invoices = () => {
         <DataGrid
           getRowId={(row) => row._id}
           checkboxSelection
-          rows={data.Results || []}
+          rows={data?.Results || []}
           columns={columns}
           components={{ Toolbar: GridToolbar }}
         />

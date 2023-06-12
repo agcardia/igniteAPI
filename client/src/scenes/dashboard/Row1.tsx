@@ -18,11 +18,12 @@ const Row1 = () => {
   const { palette } = useTheme();
   const { data: expenseQueryData } = useGetExpensesQuery();
   const { data: revenueQueryData } = useGetRevenuesQuery();
+  console.log(revenueQueryData);
 
   const expenseData = useMemo(() => {
     return (
       expenseQueryData &&
-      expenseQueryData.Results.map(({ amount, date }) => {
+      expenseQueryData.Results.map(({amount, date}) => {
         return {
           amount: amount,
           date: date.substring(0, 10)
@@ -34,7 +35,7 @@ const Row1 = () => {
   const revenueData = useMemo(() => {
     return (
       revenueQueryData &&
-      revenueQueryData.Results.map(({ amount, date }) => {
+      revenueQueryData.Results.map(({amount, date}) => {
         return {
           amount: amount,
           date: date.substring(0, 10)

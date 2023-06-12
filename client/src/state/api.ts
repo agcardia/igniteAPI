@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {Expense, Revenue, Quote, Client, Invoice, Weather} from "./types";
 
 export const api = createApi({
-    baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:5000'}),
+    baseQuery: fetchBaseQuery({baseUrl: process.env.BACKEND_URL ? `http://${process.env.BACKEND_URL}:5000` :'http://localhost:5000'}),
     reducerPath: "main",
     tagTypes : ["Expenses",'Revenues','Quotes','Clients',"Invoices","Weather"],
     endpoints: (build) => ({

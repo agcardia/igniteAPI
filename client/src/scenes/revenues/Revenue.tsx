@@ -1,17 +1,11 @@
-import {useState, useEffect} from 'react';
 import {Box} from '@mui/material';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import Header from '../../components/Header';
+import { useGetRevenuesQuery } from '../../state/api';
 
 const Revenue = () => {
 
-    const [data,setData] = useState<Array<any>>([])
-
-    useEffect(() => {
-        fetch('http://localhost:5000/revenue')
-        .then(res => res.json())
-        .then(data => setData(data.Results))
-    })
+    const {data: expenseData} = useGetRevenuesQuery();
 
     const columns = [
         {field:"_id", headerName:"ID", flex:1},
@@ -36,7 +30,7 @@ const Revenue = () => {
             }}>
                 <DataGrid getRowId={(row)=>row._id} 
                         checkboxSelection 
-                        rows={data} 
+                        rows={expenseData?.Results || []} 
                         columns={columns} 
                         components={{ Toolbar:GridToolbar }}
                 />
